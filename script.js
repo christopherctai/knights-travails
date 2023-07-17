@@ -28,9 +28,9 @@ const Coordinate = (x, y, possibleMoves = []) => {
 
 const findImmediateMoves = (startCoordinate) => {
     for (i = 0; i < 8; i++) {
-        let endCoordinate = Coordinate(startCoordinate.x + moves[i][0], startCoordinate.y + moves[i][1])
+        let endCoordinate = Coordinate(startCoordinate.x + moves[i][0], startCoordinate.y + moves[i][1]);
         if (endCoordinate.x > 7 || endCoordinate.x < 0 || endCoordinate.y > 7 || endCoordinate.y < 0) {
-            endCoordinate = 'null'; 
+            endCoordinate = null; 
         } 
         startCoordinate.possibleMoves.push(endCoordinate); 
     }
@@ -40,12 +40,14 @@ const findImmediateMoves = (startCoordinate) => {
 const buildTree = (startCoordinate) => {
     // find possible moves 
     for (i = 0; i < 64; i++) {
-        
+        findImmediateMoves(startCoordinate); 
+
     }
 }
 
 
-let testCoord = Coordinate(3, 3);
+let testCoord = Coordinate(0, 0);
+console.log(util.inspect(testCoord, false, null, true)); 
 
 
 /* 
