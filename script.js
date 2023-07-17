@@ -21,9 +21,12 @@ const knightMoves = (start, end) => {
 console.log((1, 2) + (-3, 4))
 
 
-// building the tree 
-
 /* 
+
+
+BUILDING THE TREE 
+
+
 The possible moves if a knight is at the center of a chessboard for instance (3, 3) are 8: 
 1) (+1, +2) -> (4, 5)
 2) (+2, +1) -> (5, 4) 
@@ -67,7 +70,21 @@ const findImmediateMoves = (startCoordinate) {
     }
 }
 
+We should probably make this tree like 64 times, just so we cover the whole board. 
 
+
+SEARCHING THE TREE 
+
+how do we search this thing to find the right answer?? 
+
+We do the same process for every branch of the tree: 
+1) Go down to one of the possible moves 
+2) See if that move is correct, desired coordinate. 
+    if it is, then we have found our shortest route 
+    if it is not, then move on to the next possible move 
+3) If none of those possible moves are correct, then we go to the NEXT set of possible moves from the first possible move. 
+    this is a queue. FIFO. Breadth first approach. Level order. 
+4) continue until we have found the desired coordinate to land on, then print out the steps it takes to get there. 
 
 
 
