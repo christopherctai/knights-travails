@@ -1,3 +1,6 @@
+const util = require("util");
+
+
 let gameboard = []; 
 for (i = 0; i < 8; i++) {
     for (j = 0; j < 8; j++) {
@@ -6,19 +9,43 @@ for (i = 0; i < 8; i++) {
 }
 
 let knight; 
+let moves = [[+1, +2], [+2, +1], [+2, -1], [+1, -2], [-1, -2], [-2, -1], [-2, +1], [-1, +2]];
 
 
 const knightMoves = (start, end) => {
     // tree 
-    const buildTree = (start, gameboard) => {
-        // find possible moves 
-
-    }
-
-    buildTree(start, gameboard); 
+    
 } 
 
-console.log((1, 2) + (-3, 4))
+const Coordinate = (x, y, possibleMoves = []) => {
+    return {
+        x: x, 
+        y: y, 
+        possibleMoves: possibleMoves
+    }
+}  
+
+
+const findImmediateMoves = (startCoordinate) => {
+    for (i = 0; i < 8; i++) {
+        let endCoordinate = Coordinate(startCoordinate.x + moves[i][0], startCoordinate.y + moves[i][1])
+        if (endCoordinate.x > 7 || endCoordinate.x < 0 || endCoordinate.y > 7 || endCoordinate.y < 0) {
+            endCoordinate = 'null'; 
+        } 
+        startCoordinate.possibleMoves.push(endCoordinate); 
+    }
+} 
+
+
+const buildTree = (startCoordinate) => {
+    // find possible moves 
+    for (i = 0; i < 64; i++) {
+        
+    }
+}
+
+
+let testCoord = Coordinate(3, 3);
 
 
 /* 
@@ -44,7 +71,7 @@ let  = [(+1, +2), (+2, +1), (+2, -1), (+1, -2), (-1, -2), (-2, -1), (-2, +1), (-
 Every coordinate move also needs to have another list of possible moves that could be made.
 So maybe we make each coordinate object based: 
 
-const Coordinate = (x, y, possibleMoves = null) {
+const Coordinate = (x, y, possibleMoves = null) => {
     return {
         x: x, 
         y: y, 
@@ -58,7 +85,7 @@ Where possibleMoves is an array of other coordinates that also have an x, y, and
 Then, take the starting coordinate and add it with the array to get a list of possible moves 
 We need to check to see if the moves land on the board though. We can either do that after, or during. Let's try during: 
 
-const findImmediateMoves = (startCoordinate) {
+const findImmediateMoves = (startCoordinate) => {
     let moves = [[+1, +2], [+2, +1], [+2, -1], [+1, -2], [-1, -2], [-2, -1], [-2, +1], [-1, +2]];
 
     for (i = 0; i < 8; i++) {
