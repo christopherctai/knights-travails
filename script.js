@@ -37,25 +37,20 @@ const findImmediateMoves = (startCoordinate) => {
 } 
 
 
-const buildTree = (startCoordinate, repeats = 4096) => { 
-    if (repeats === 0) return 
-    if (startCoordinate === null) return 
+const buildTree = (startCoordinate) => {  
+    if (startCoordinate === null) return; 
     findImmediateMoves(startCoordinate); 
-    for (i = 0; i < 8; i++) {
-        buildTree(startCoordinate.possibleMoves[i], repeats - 1); 
-    } 
-    return startCoordinate;
+    return startCoordinate; 
 }
 
-/*
+/*if ()
 let testCoord = Coordinate(0, 0);
 findImmediateMoves(testCoord); 
 console.log(util.inspect(testCoord, false, null, true)); 
 */  
 
 let testCoord = Coordinate(3, 3);
-buildTree(testCoord); 
-console.log(testCoord); 
+console.log(buildTree(testCoord));
 //console.log(util.inspect(testCoord, false, null, true)); 
 
 /* 
