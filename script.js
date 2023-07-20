@@ -13,7 +13,6 @@ let moves = [[+1, +2], [+2, +1], [+2, -1], [+1, -2], [-1, -2], [-2, -1], [-2, +1
 
 
 const knightMoves = (start, end) => {
-    // tree 
     
 } 
 
@@ -37,10 +36,19 @@ const findImmediateMoves = (startCoordinate) => {
 } 
 
 
-const buildTree = (startCoordinate) => {  
-    if (startCoordinate === null) return; 
-    findImmediateMoves(startCoordinate); 
-    return startCoordinate; 
+const buildTree = (startCoordinate, repeats = 5) => {  
+    if (startCoordinate === null) return;  
+    if (repeats === 0) return;
+    findImmediateMoves(startCoordinate);
+    repeats--;
+    buildTree(startCoordinate.possibleMoves[0], repeats); 
+    buildTree(startCoordinate.possibleMoves[1], repeats); 
+    buildTree(startCoordinate.possibleMoves[2], repeats); 
+    buildTree(startCoordinate.possibleMoves[3], repeats); 
+    buildTree(startCoordinate.possibleMoves[4], repeats); 
+    buildTree(startCoordinate.possibleMoves[5], repeats); 
+    buildTree(startCoordinate.possibleMoves[6], repeats); 
+    buildTree(startCoordinate.possibleMoves[7], repeats); 
 }
 
 /*if ()
@@ -50,13 +58,16 @@ console.log(util.inspect(testCoord, false, null, true));
 */  
 
 let testCoord = Coordinate(3, 3);
-console.log(buildTree(testCoord));
+buildTree(testCoord); 
+console.log(testCoord); 
+console.log(testCoord.possibleMoves[0])
 //console.log(util.inspect(testCoord, false, null, true)); 
 
 /* 
 
 
 BUILDING THE TREE 
+
 
 
 The possible moves if a knight is at the center of a chessboard for instance (3, 3) are 8: 
