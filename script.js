@@ -16,6 +16,25 @@ const knightMoves = (start, end) => {
     
 } 
 
+const findClosestEndCoordinate = (startCoordinate, endCoordinate) => {
+    let queue = []; 
+    queue.push(startCoordinate); 
+    while (queue.length !== 0) { 
+        let front = queue[0]; 
+        if (front.x === endCoordinate.x && front.y === endCoordinate.y) return front;
+        if (front.possibleMoves[0] !== null) queue.push(front.possibleMoves[0]);
+        if (front.possibleMoves[1] !== null) queue.push(front.possibleMoves[1]);
+        if (front.possibleMoves[2] !== null) queue.push(front.possibleMoves[2]);
+        if (front.possibleMoves[3] !== null) queue.push(front.possibleMoves[3]);
+        if (front.possibleMoves[4] !== null) queue.push(front.possibleMoves[4]);
+        if (front.possibleMoves[5] !== null) queue.push(front.possibleMoves[5]);
+        if (front.possibleMoves[6] !== null) queue.push(front.possibleMoves[6]);
+        if (front.possibleMoves[7] !== null) queue.push(front.possibleMoves[7]);
+        queue.shift();
+    }  
+    return 
+}
+
 const Coordinate = (x, y, possibleMoves = []) => {
     return {
         x: x, 
@@ -57,10 +76,14 @@ findImmediateMoves(testCoord);
 console.log(util.inspect(testCoord, false, null, true)); 
 */  
 
-let testCoord = Coordinate(3, 3);
+let testCoord = Coordinate(4, 4);
 buildTree(testCoord); 
-console.log(testCoord); 
-console.log(testCoord.possibleMoves[0])
+let endCoord = Coordinate(5, 5);  
+console.log(findClosestEndCoordinate(testCoord, endCoord));
+
+
+
+
 //console.log(util.inspect(testCoord, false, null, true)); 
 
 /* 
