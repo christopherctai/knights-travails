@@ -1,3 +1,4 @@
+const path = require("path");
 const util = require("util");
 
 
@@ -15,25 +16,6 @@ let moves = [[+1, +2], [+2, +1], [+2, -1], [+1, -2], [-1, -2], [-2, -1], [-2, +1
 const knightMoves = (start, end) => {
     
 } 
-
-const findClosestEndCoordinate = (startCoordinate, endCoordinate) => {
-    let queue = []; 
-    queue.push(startCoordinate); 
-    while (queue.length !== 0) { 
-        let front = queue[0]; 
-        if (front.x === endCoordinate.x && front.y === endCoordinate.y) return front;
-        if (front.possibleMoves[0] !== null) queue.push(front.possibleMoves[0]);
-        if (front.possibleMoves[1] !== null) queue.push(front.possibleMoves[1]);
-        if (front.possibleMoves[2] !== null) queue.push(front.possibleMoves[2]);
-        if (front.possibleMoves[3] !== null) queue.push(front.possibleMoves[3]);
-        if (front.possibleMoves[4] !== null) queue.push(front.possibleMoves[4]);
-        if (front.possibleMoves[5] !== null) queue.push(front.possibleMoves[5]);
-        if (front.possibleMoves[6] !== null) queue.push(front.possibleMoves[6]);
-        if (front.possibleMoves[7] !== null) queue.push(front.possibleMoves[7]);
-        queue.shift();
-    }  
-    return 
-}
 
 const Coordinate = (x, y, possibleMoves = []) => {
     return {
@@ -68,6 +50,46 @@ const buildTree = (startCoordinate, repeats = 5) => {
     buildTree(startCoordinate.possibleMoves[5], repeats); 
     buildTree(startCoordinate.possibleMoves[6], repeats); 
     buildTree(startCoordinate.possibleMoves[7], repeats); 
+} 
+
+const findClosestEndCoordinate = (startCoordinate, endCoordinate) => {
+    let queue = []; 
+    queue.push(startCoordinate); 
+    while (queue.length !== 0) { 
+        let front = queue[0]; 
+        if (front.x === endCoordinate.x && front.y === endCoordinate.y) return front;
+        if (front.possibleMoves[0] !== null) queue.push(front.possibleMoves[0]);
+        if (front.possibleMoves[1] !== null) queue.push(front.possibleMoves[1]);
+        if (front.possibleMoves[2] !== null) queue.push(front.possibleMoves[2]);
+        if (front.possibleMoves[3] !== null) queue.push(front.possibleMoves[3]);
+        if (front.possibleMoves[4] !== null) queue.push(front.possibleMoves[4]);
+        if (front.possibleMoves[5] !== null) queue.push(front.possibleMoves[5]);
+        if (front.possibleMoves[6] !== null) queue.push(front.possibleMoves[6]);
+        if (front.possibleMoves[7] !== null) queue.push(front.possibleMoves[7]);
+        queue.shift();
+    }  
+    return 
+}  
+
+
+const findPath = (startCoordinate, endCoordinate, path = []) => {  
+    if (startCoordinate === null || startCoordinate === undefined) return; 
+    if (startCoordinate.possibleMoves === []) return;
+    if (startCoordinate === endCoordinate) {
+        path.push(endCoordinate); 
+        console.log(path); 
+        return path;
+    } 
+    path.push(startCoordinate);  
+    findPath(startCoordinate.possibleMoves[0], endCoordinate, path)
+    findPath(startCoordinate.possibleMoves[1], endCoordinate, path)
+    findPath(startCoordinate.possibleMoves[2], endCoordinate, path)
+    findPath(startCoordinate.possibleMoves[3], endCoordinate, path)
+    findPath(startCoordinate.possibleMoves[4], endCoordinate, path)
+    findPath(startCoordinate.possibleMoves[5], endCoordinate, path)
+    findPath(startCoordinate.possibleMoves[6], endCoordinate, path)
+    findPath(startCoordinate.possibleMoves[7], endCoordinate, path)
+
 }
 
 /*if ()
@@ -79,7 +101,8 @@ console.log(util.inspect(testCoord, false, null, true));
 let testCoord = Coordinate(4, 4);
 buildTree(testCoord); 
 let endCoord = Coordinate(5, 5);  
-console.log(findClosestEndCoordinate(testCoord, endCoord));
+endCoord = findClosestEndCoordinate(testCoord, endCoord); 
+console.log(findPath(testCoord, endCoord)); 
 
 
 
