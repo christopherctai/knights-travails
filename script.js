@@ -101,9 +101,10 @@ console.log(util.inspect(testCoord, false, null, true));
 let testCoord = Coordinate(4, 4);
 buildTree(testCoord); 
 let endCoord = Coordinate(5, 5);  
-endCoord = findClosestEndCoordinate(testCoord, endCoord); 
-console.log(findPath(testCoord, endCoord)); 
-
+endCoord = findClosestEndCoordinate(testCoord, endCoord);  
+console.log(testCoord.possibleMoves[2])  
+console.log(testCoord.possibleMoves[2].possibleMoves[7]); 
+console.log(endCoord);
 
 
 
@@ -173,7 +174,12 @@ We do the same process for every branch of the tree:
     if it is not, then move on to the next possible move 
 3) If none of those possible moves are correct, then we go to the NEXT set of possible moves from the first possible move. 
     this is a queue. FIFO. Breadth first approach. Level order. 
-4) continue until we have found the desired coordinate to land on, then print out the steps it takes to get there. 
+4) continue until we have found the desired coordinate to land on, then print out the steps it takes to get there.  
+
+
+FINDING THE STEPS 
+
+
 
 
 
