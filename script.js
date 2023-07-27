@@ -102,9 +102,7 @@ let testCoord = Coordinate(4, 4);
 buildTree(testCoord); 
 let endCoord = Coordinate(5, 5);  
 endCoord = findClosestEndCoordinate(testCoord, endCoord);  
-console.log(testCoord.possibleMoves[2])  
-console.log(testCoord.possibleMoves[2].possibleMoves[7]); 
-console.log(endCoord);
+console.log(findPath(testCoord, endCoord)); 
 
 
 
@@ -177,7 +175,24 @@ We do the same process for every branch of the tree:
 4) continue until we have found the desired coordinate to land on, then print out the steps it takes to get there.  
 
 
-FINDING THE STEPS 
+FINDING AND RECORDING THE STEPS 
+
+We have to find a way to record all the steps taken in the path. 
+probably should record it in an array 
+
+Unfortunately this isn't a binary search tree. 
+However, we have set up the tree so that each move is in a clockwise path  
+
+NNE 
+ENE  
+ESE 
+SSE 
+SSW 
+WSW 
+WNW 
+NNW 
+
+HOW TO RECORD? 
 
 
 
